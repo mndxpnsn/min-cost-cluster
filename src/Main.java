@@ -55,7 +55,7 @@ public class Main {
         return res;
     }
 
-    static double  bottom_up(double[][] X, int n) {
+    static double bottom_up(double[][] X, int n) {
         double res = 0.0;
 
         double[][] L = new double[n + 1][n + 1];
