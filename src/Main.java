@@ -5,7 +5,7 @@ public class Main {
     static double min(double x, double y) {
         double res = 0.0;
 
-        if(x > 0) {
+        if(x > 0 && y > 0) {
             if (x < y) res = x;
             else res = y;
         }
@@ -44,7 +44,7 @@ public class Main {
             for(int k = i + 1; k < j - 1; ++k) {
                 double val1 = recur(X, i, k, dp);
                 double val2 = recur(X, k + 1, j, dp);
-                min_val = min(min_val, val1 + val2);
+                min_val = min(val1 + val2, min_val);
             }
 
             res = X[i][j] + min_val;
@@ -65,7 +65,7 @@ public class Main {
                 if(i + j < n) {
                     double min_val = 0.0;
                     for(int k = i + 1; k < j - 1; ++k) {
-                        min_val = min(min_val, L[i][k] + L[k + 1][j]);
+                        min_val = min(L[i][k] + L[k + 1][j], min_val);
                     }
 
                     L[i][i + j] = X[i][i + j] + min_val;
