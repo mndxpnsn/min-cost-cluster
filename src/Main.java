@@ -5,7 +5,7 @@ public class Main {
     static double min(double x, double y) {
         double res = 0.0;
 
-        if(x > 0 && y > 0) {
+        if(x > 0 || y > 0) {
             if (x < y) res = x;
             else res = y;
         }
