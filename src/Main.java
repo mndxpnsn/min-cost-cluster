@@ -230,7 +230,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Size of input vector
+        // Size of cluster tree + 1
         int n = 15;
 
         // Declare and initialize cost matrix and cluster trees
