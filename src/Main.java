@@ -100,13 +100,10 @@ public class Main {
     }
 
     static double top_down(double[][] X, int n) {
-        double res = 0.0;
 
         double[][] dp = new double[n + 1][n + 1];
-
-        res = recur(X, 0, n - 1, dp);
-
-        return res;
+        
+        return recur(X, 0, n - 1, dp);
     }
 
     public static void main(String[] args) {
@@ -125,7 +122,7 @@ public class Main {
         // Compute minimum cluster cost using a bottom-up strategy
         double cluster_cost2 = bottom_up(X, n);
 
-        System.out.println("cluster_cost1: " + cluster_cost1);
-        System.out.println("cluster_cost2: " + cluster_cost2);
+        System.out.println("cluster cost top-down: " + cluster_cost1);
+        System.out.println("cluster cost bottom-up: " + cluster_cost2);
     }
 }
