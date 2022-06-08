@@ -3,7 +3,6 @@ import java.util.Random;
 public class Main {
 
     static double LARGE_NUM = 1000.0;
-    static double ver_cost = 0.0;
 
     static double min(double x, double y) {
         double res = 0.0;
@@ -172,46 +171,46 @@ public class Main {
         }
     }
 
-    static void ver_tree_rec(double[][] mat, int[][] tree, int i, int j, int n) {
+    static void ver_tree_rec(double[][] mat, int[][] tree, int i, int j, int n, double[] ver_cost) {
         int k = tree[i][j];
 
         double res = 0.0;
 
         if(j - i == n - 1) {
             System.out.println("root node is: " + k + ", (" + i + "," + j + ")");
-            ver_cost += mat[i][j];
+            ver_cost[0] += mat[i][j];
         }
 
         if(i == k) {
             if (k + 1 < j) {
                 int r = tree[k + 1][j];
-                ver_cost += mat[k + 1][j];
+                ver_cost[0] += mat[k + 1][j];
                 System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
-                ver_tree_rec(mat, tree, k + 1, j, n);
+                ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
             }
         }
         else if (k == j) {
             if(i < k - 1) {
                 int l = tree[i][k - 1];
-                ver_cost += mat[i][k - 1];
+                ver_cost[0] += mat[i][k - 1];
                 System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + (k - 1) + ")");
-                ver_tree_rec(mat, tree, i, k, n);
+                ver_tree_rec(mat, tree, i, k, n, ver_cost);
             }
         }
 
         if(i < k) {
             int l = tree[i][k];
-            ver_cost += mat[i][k];
+            ver_cost[0] += mat[i][k];
             System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + k + ")");
-            ver_tree_rec(mat, tree, i, k, n);
+            ver_tree_rec(mat, tree, i, k, n, ver_cost);
         }
 
         if(k + 1 < j) {
             int r = tree[k + 1][j];
             if (i < k) {
-                ver_cost += mat[k + 1][j];
+                ver_cost[0] += mat[k + 1][j];
                 System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
-                ver_tree_rec(mat, tree, k + 1, j, n);
+                ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
             }
         }
     }
@@ -221,9 +220,12 @@ public class Main {
         print_tree_rec(tree, 0, n - 1, n);
     }
 
-    static void ver_tree(double[][] mat, int[][] tree, int n) {
+    static double ver_tree(double[][] mat, int[][] tree, int n) {
+        double[] ver_cost = new double[1];
 
-        ver_tree_rec(mat, tree, 0, n - 1, n);
+        ver_tree_rec(mat, tree, 0, n - 1, n, ver_cost);
+
+        return ver_cost[0];
     }
 
     public static void main(String[] args) {
@@ -244,8 +246,11 @@ public class Main {
         // Compute minimum cluster cost using a bottom-up strategy
         double cluster_cost2 = bottom_up(cost, n, ctree2);
 
-        // Verify construction of tree
-        ver_tree(cost, ctree1, n);
+        // Verify construction of cluster tree obtain top-down
+        double ver_cost1 = ver_tree(cost, ctree1, n);
+
+        // Verify construction of cluster tree obtain top-down
+        double ver_cost2 = ver_tree(cost, ctree2, n);
 
         System.out.println("tree top-down");
         print_tree_mat(ctree1, n);
@@ -258,6 +263,7 @@ public class Main {
 
         System.out.println("cluster cost top-down: " + cluster_cost1);
         System.out.println("cluster cost bottom-up: " + cluster_cost2);
-        System.out.println("Verification cluster cost: " + ver_cost);
+        System.out.println("Verification cluster cost top-down: " + ver_cost1);
+        System.out.println("Verification cluster cost bottom-up: " + ver_cost2);
     }
 }
