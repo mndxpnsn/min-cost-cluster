@@ -246,10 +246,10 @@ public class Main {
         // Compute minimum cluster cost using a bottom-up strategy
         double cluster_cost2 = bottom_up(cost, n, ctree2);
 
-        // Verify construction of cluster tree obtain top-down
+        // Verify construction of cluster tree obtained top-down
         double ver_cost1 = ver_tree(cost, ctree1, n);
 
-        // Verify construction of cluster tree obtain top-down
+        // Verify construction of cluster tree obtained bottom-up
         double ver_cost2 = ver_tree(cost, ctree2, n);
 
         System.out.println("tree top-down");
