@@ -231,16 +231,12 @@ public class Main {
         // Size of input vector
         int n = 15;
 
-        // Declare and initialize cost matrix
+        // Declare and initialize cost matrix and cluster trees
         double[][] cost = new double[n + 1][n + 1];
         int[][] ctree1 = new int[n + 1][n + 1];
         int[][] ctree2 = new int[n + 1][n + 1];
 
         init_mat(n, cost);
-
-        init_tree(n, ctree1);
-
-        init_tree(n, ctree2);
 
         // Compute minimum cluster cost using a top-down strategy
         double cluster_cost1 = top_down(cost, n, ctree1);
