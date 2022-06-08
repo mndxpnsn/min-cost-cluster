@@ -45,7 +45,7 @@ public class Main {
         }
     }
 
-    static double recur(double[][] X, int i, int j, double[][] dp) {
+    static double recur(double[][] mat, int i, int j, double[][] dp) {
         double res = 0.0;
 
         // Get results from memo table if available
@@ -55,19 +55,19 @@ public class Main {
 
         // Return cluster of one node
         if(i == j - 1) {
-            return X[i][j];
+            return mat[i][j];
         }
 
         // Compute minimum cluster cost
         if(i < j - 1) {
             double min_val = 0.0;
             for(int k = i; k < j; ++k) {
-                double val1 = recur(X, i, k, dp);
-                double val2 = recur(X, k + 1, j, dp);
+                double val1 = recur(mat, i, k, dp);
+                double val2 = recur(mat, k + 1, j, dp);
                 min_val = min(val1 + val2, min_val);
             }
 
-            res = X[i][j] + min_val;
+            res = mat[i][j] + min_val;
         }
 
         // Store results in memo table
@@ -76,7 +76,7 @@ public class Main {
         return res;
     }
 
-    static double bottom_up(double[][] X, int n) {
+    static double bottom_up(double[][] mat, int n) {
         double res = 0.0;
 
         double[][] L = new double[n + 1][n + 1];
@@ -89,7 +89,7 @@ public class Main {
                         min_val = min(L[i][k] + L[k + 1][i + j], min_val);
                     }
 
-                    L[i][i + j] = X[i][i + j] + min_val;
+                    L[i][i + j] = mat[i][i + j] + min_val;
                 }
             }
         }
@@ -99,11 +99,11 @@ public class Main {
         return res;
     }
 
-    static double top_down(double[][] X, int n) {
+    static double top_down(double[][] mat, int n) {
 
         double[][] dp = new double[n + 1][n + 1];
         
-        return recur(X, 0, n - 1, dp);
+        return recur(mat, 0, n - 1, dp);
     }
 
     public static void main(String[] args) {
@@ -112,15 +112,15 @@ public class Main {
         int n = 10;
 
         // Declare and initialize cost matrix
-        double[][] X = new double[n + 1][n + 1];
+        double[][] cost = new double[n + 1][n + 1];
 
-        init_mat(n, X);
+        init_mat(n, cost);
 
         // Compute minimum cluster cost using a top-down strategy
-        double cluster_cost1 = top_down(X, n);
+        double cluster_cost1 = top_down(cost, n);
 
         // Compute minimum cluster cost using a bottom-up strategy
-        double cluster_cost2 = bottom_up(X, n);
+        double cluster_cost2 = bottom_up(cost, n);
 
         System.out.println("cluster cost top-down: " + cluster_cost1);
         System.out.println("cluster cost bottom-up: " + cluster_cost2);
