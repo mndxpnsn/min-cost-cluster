@@ -141,72 +141,54 @@ public class Main {
             System.out.println("root node is: " + k + ", (" + i + "," + j + ")");
         }
 
-        if(i == k) {
-            if (k + 1 < j) {
-                int r = tree[k + 1][j];
-                System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
-                print_tree_rec(tree, k + 1, j, n);
-            }
+        if(i == k && k + 1 < j) {
+            int r = tree[k + 1][j];
+            System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
+            print_tree_rec(tree, k + 1, j, n);
         }
-        else if (k == j) {
-            if(i < k - 1) {
-                int l = tree[i][k - 1];
-                System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + (k - 1) + ")");
-                print_tree_rec(tree, i, k, n);
-            }
+        else if (k == j && i < k - 1) {
+            int l = tree[i][k - 1];
+            System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + (k - 1) + ")");
+            print_tree_rec(tree, i, k, n);
         }
 
-        int l = tree[i][k];
         if(i < k) {
+            int l = tree[i][k];
             System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + k + ")");
             print_tree_rec(tree, i, k, n);
         }
 
-        if(k + 1 < j) {
+        if(k + 1 < j && i < k) {
             int r = tree[k + 1][j];
-            if (i < k) {
-                System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
-                print_tree_rec(tree, k + 1, j, n);
-            }
+            System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
+            print_tree_rec(tree, k + 1, j, n);
         }
     }
 
     static void ver_tree_rec(double[][] mat, int[][] tree, int i, int j, int n, double[] ver_cost) {
         int k = tree[i][j];
 
-        double res = 0.0;
-
         if(j - i == n - 1) {
             ver_cost[0] += mat[i][j];
         }
 
-        if(i == k) {
-            if (k + 1 < j) {
-                int r = tree[k + 1][j];
-                ver_cost[0] += mat[k + 1][j];
-                ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
-            }
+        if(i == k && k + 1 < j) {
+            ver_cost[0] += mat[k + 1][j];
+            ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
         }
-        else if (k == j) {
-            if(i < k - 1) {
-                int l = tree[i][k - 1];
-                ver_cost[0] += mat[i][k - 1];
-                ver_tree_rec(mat, tree, i, k, n, ver_cost);
-            }
+        else if (k == j && i < k - 1) {
+            ver_cost[0] += mat[i][k - 1];
+            ver_tree_rec(mat, tree, i, k, n, ver_cost);
         }
 
         if(i < k) {
-            int l = tree[i][k];
             ver_cost[0] += mat[i][k];
             ver_tree_rec(mat, tree, i, k, n, ver_cost);
         }
 
-        if(k + 1 < j) {
-            int r = tree[k + 1][j];
-            if (i < k) {
-                ver_cost[0] += mat[k + 1][j];
-                ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
-            }
+        if(k + 1 < j && i < k) {
+            ver_cost[0] += mat[k + 1][j];
+            ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
         }
     }
 
