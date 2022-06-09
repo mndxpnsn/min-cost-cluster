@@ -173,22 +173,12 @@ public class Main {
             ver_cost[0] += mat[i][j];
         }
 
-        if(i == k && k + 1 < j) {
-            ver_cost[0] += mat[k + 1][j];
-            ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
-        }
-
-        if(k == j && i < k - 1) {
-            ver_cost[0] += mat[i][k - 1];
-            ver_tree_rec(mat, tree, i, k, n, ver_cost);
-        }
-
         if(i < k) {
             ver_cost[0] += mat[i][k];
             ver_tree_rec(mat, tree, i, k, n, ver_cost);
         }
 
-        if(k + 1 < j && i < k) {
+        if(k + 1 < j) {
             ver_cost[0] += mat[k + 1][j];
             ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
         }
