@@ -177,7 +177,6 @@ public class Main {
         double res = 0.0;
 
         if(j - i == n - 1) {
-            System.out.println("root node is: " + k + ", (" + i + "," + j + ")");
             ver_cost[0] += mat[i][j];
         }
 
@@ -185,7 +184,6 @@ public class Main {
             if (k + 1 < j) {
                 int r = tree[k + 1][j];
                 ver_cost[0] += mat[k + 1][j];
-                System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
                 ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
             }
         }
@@ -193,7 +191,6 @@ public class Main {
             if(i < k - 1) {
                 int l = tree[i][k - 1];
                 ver_cost[0] += mat[i][k - 1];
-                System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + (k - 1) + ")");
                 ver_tree_rec(mat, tree, i, k, n, ver_cost);
             }
         }
@@ -201,7 +198,6 @@ public class Main {
         if(i < k) {
             int l = tree[i][k];
             ver_cost[0] += mat[i][k];
-            System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + k + ")");
             ver_tree_rec(mat, tree, i, k, n, ver_cost);
         }
 
@@ -209,7 +205,6 @@ public class Main {
             int r = tree[k + 1][j];
             if (i < k) {
                 ver_cost[0] += mat[k + 1][j];
-                System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
                 ver_tree_rec(mat, tree, k + 1, j, n, ver_cost);
             }
         }
