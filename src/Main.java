@@ -141,25 +141,13 @@ public class Main {
             System.out.println("root node is: " + k + ", (" + i + "," + j + ")");
         }
 
-        if(i == k && k + 1 < j) {
-            int r = tree[k + 1][j];
-            System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
-            print_tree_rec(tree, k + 1, j, n);
-        }
-        
-        if(k == j && i < k - 1) {
-            int l = tree[i][k - 1];
-            System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + (k - 1) + ")");
-            print_tree_rec(tree, i, k, n);
-        }
-
         if(i < k) {
             int l = tree[i][k];
             System.out.println("node " + l + " is the left child of node " + k + ", (" + i + "," + k + ")");
             print_tree_rec(tree, i, k, n);
         }
 
-        if(k + 1 < j && i < k) {
+        if(k + 1 < j) {
             int r = tree[k + 1][j];
             System.out.println("node " + r + " is the right child of node " + k + ", (" + (k + 1) + "," + j + ")");
             print_tree_rec(tree, k + 1, j, n);
